@@ -1,0 +1,61 @@
+MINHA CASA, MINHA (DÍ)VIDA — GOOGLE SHEETS
+
+O QUE ESTA VERSÃO FAZ
+- Abre como aplicativo web do Google Apps Script, em navegador de computador e celular.
+- Guarda receitas, despesas, contas, parcelas, reservas, projetos, pessoas e configurações em abas separadas da planilha Google.
+- Guarda comprovantes em uma pasta do Google Drive e oferece cópias de segurança no Drive.
+- Mostra os gráficos e relatórios dentro do aplicativo. O botão “Atualizar” busca dados da planilha sem recarregar a página.
+- Não pede cadastro, e-mail ou senha no aplicativo. A pessoa escolhe “Quem está cadastrando” no topo; a identificação aparece junto dos registros. Ela é separada do campo “Responsável pelo gasto”, usado para indicar de quem é a receita ou despesa.
+- Oferece um formulário Google opcional para lançar contas, despesas e receitas com rapidez, integrado às abas do aplicativo.
+- Permite filtrar os painéis e lançamentos de um mês inicial até um mês final, incluindo todos os meses completos do intervalo.
+- No lançamento de uma despesa, escolher exatamente o nome de uma conta recorrente vincula o pagamento ao mês da data e atualiza a conta para “Completo”, sem duplicar a despesa nos gráficos.
+- Na aba “Lançamentos”, escolha o ano para ver receitas, despesas e aportes agrupados por mês. As abas são agrupadas em Visão, Dia a dia, Planos e App. O botão de lápis abre o registro para corrigir; excluir um pagamento vinculado reabre a conta recorrente como pendente.
+- Na tela inicial há um panorama acumulado de receitas, despesas, resultado e cofrinhos. No cabeçalho, escolha mês/ano inicial e final e aplique o filtro; o resumo permanece fixo no topo. O padrão é janeiro a dezembro do ano atual. O botão “Atualizar” consulta a planilha.
+- Em Relatórios, gráficos de barras anuais e pizza por categoria consideram todo o histórico registrado.
+- O lançamento tem um seletor de contas recorrentes com o dia de vencimento; a descrição continua livre para outros registros.
+
+IMPORTANTE SOBRE ACESSO
+Esta edição usa um link privado com uma chave aleatória, em vez de uma tela de login. Quem receber o link completo poderá abrir e alterar os dados. Não publique o link em redes sociais nem em páginas públicas. A planilha e a pasta de comprovantes continuam privadas no Drive do proprietário.
+
+ATUALIZAR UMA INSTALAÇÃO EXISTENTE
+1. Abra o mesmo projeto do Apps Script que já está conectado à sua planilha.
+2. Atualize Code.gs, Index.html e appsscript.json usando os arquivos deste pacote.
+3. Não execute setupFinanceApp novamente: a planilha, os lançamentos e o link privado ficam preservados no projeto existente.
+4. Vá em Implantar > Gerenciar implantações, edite a implantação atual, escolha Nova versão e clique em Implantar. O link /exec permanece o mesmo. Autorize novamente se o Google solicitar.
+
+INSTALAÇÃO
+1. Em script.google.com, crie um projeto Apps Script.
+2. Substitua o conteúdo de Code.gs pelo arquivo Code.gs deste pacote.
+3. Crie um arquivo HTML chamado Index e cole o conteúdo de Index.html.
+4. Em Configurações do projeto, habilite “Mostrar o arquivo de manifesto appsscript.json” e substitua-o pelo manifesto incluído aqui.
+5. No editor, escolha setupFinanceApp e clique em Executar. Autorize o acesso à planilha e ao Drive. Essa etapa cria a planilha, as abas, a pasta de comprovantes e a pasta de backups.
+6. Publique em Implantar > Nova implantação > App da Web. Execute como “Eu” e, se a conta oferecer essa opção, permita acesso a “Qualquer pessoa, inclusive anônima”.
+7. Depois de implantar, escolha showFinanceSetup no editor e clique em Executar. Abra o Registro de execução e copie o “Link privado do aplicativo”.
+8. Abra esse link e compartilhe somente com as pessoas que vão usar o sistema. O nome de quem cadastra é selecionado no aplicativo, sem login. Se o link for exposto, execute rotateFinanceAppKey e use o novo link que aparecer no Registro de execução.
+
+FORMULÁRIO RÁPIDO (instalação existente)
+1. Atualize Code.gs, Index.html e appsscript.json com os arquivos deste pacote.
+2. No Apps Script, escolha setupQuickEntryForm e clique em Executar. Autorize Google Forms quando solicitado. Essa função cria o formulário, vincula as respostas à planilha e instala o processamento automático.
+3. Publique uma nova versão do app da web. O botão “Lançamento rápido” aparece no topo e abre o formulário.
+4. A URL de resposta do formulário também aparece no Registro de execução. Compartilhe só com o casal.
+O formulário não coleta e-mail e não inclui envio de comprovante. O upload de arquivos no Google Forms exige que a pessoa entre em uma Conta Google; comprovantes podem continuar sendo anexados no aplicativo. As respostas ficam numa aba bruta da planilha e também são convertidas em lançamentos/contas do sistema.
+
+ARMAZENAMENTO
+- A planilha criada fica no Google Drive de quem executou setupFinanceApp.
+- A pasta “Comprovantes” recebe imagens e PDFs (máximo de 8 MB por arquivo).
+- A pasta “Backups” mantém até 30 cópias da planilha; o sistema cria uma automática por dia de uso e permite cópia manual.
+- A coluna “Dados completos” preserva campos adicionais usados pelos relatórios e recursos do aplicativo.
+
+OCR
+A leitura OCR automática é carregada no navegador quando solicitada e precisa de internet. A imagem original é enviada para o Drive quando o lançamento é salvo.
+
+LIMITES
+O Google executa o Apps Script e o Sheets na nuvem; não há computador nem servidor próprio para manter ligado. O Apps Script tem quotas que podem mudar. Se o volume de dados ou o número de pessoas crescer bastante, será melhor migrar para um banco de dados dedicado.
+
+ARQUIVOS
+- Code.gs: funções que criam e atualizam as abas, fazem cópias e salvam comprovantes.
+- Index.html: interface do aplicativo e gráficos.
+- appsscript.json: configuração e permissões do projeto.
+
+PRIVACIDADE DO ARQUIVO DE IMPORTAÇÃO
+O pacote do aplicativo contém apenas arquivos genéricos. CSVs com dados reais da família devem ficar separados e não ser compartilhados junto com os arquivos do app.
